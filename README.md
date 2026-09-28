@@ -5,9 +5,7 @@ A physics-informed neural network (PINN) that solves inverse kinematics for a 7-
 ## What this actually does, honestly
 
 - **Solves position-only IK** for a 7R arm: given a target (x, y, z), predicts 7 joint angles. It does not predict orientation.
-- **Trades off accuracy vs. safety**, and that trade-off is explicit, not hidden:
-  - `runs/final_model.pt` (the default) — most accurate single-shot model: ~4mm mean position error, ~13mm 95th percentile, on tasks drawn from the training distribution.
-  - `runs/expE_h512_l40_mine.pt` — the singularity-aware model: ~6.6mm mean error, but ~2.3x the classical baseline's manipulability near singular configurations (i.e. genuinely safer there), vs. the default model which is actually *less* safe than the classical baseline.
+- **Trades off accuracy vs. safety**, and that trade-off is explicit, not hidden: `runs/final_model.pt` (the shipped checkpoint) is the most accurate single-shot model tried — ~4mm mean position error, ~13mm 95th percentile, on tasks drawn from the training distribution — but a version of it trained with a heavier singularity penalty was measurably safer near singular configurations (~2.3x the classical baseline's manipulability there) at the cost of accuracy (~6.6mm mean error). See [Results](#results).
 - **Does not beat a converged classical solver on raw accuracy.** DLS converges to ~0.1–0.5mm given enough iterations; a single-shot (or few-pass) PINN doesn't. The PINN's advantage shows up at small compute budgets (a few network passes vs. many DLS iterations) and in the singularity-avoidance behavior, not in final accuracy at convergence.
 - These numbers, and the debugging history behind them (several real bugs found via testing — a Jacobian indexing bug, an unreachable-training-target bug, an inert-loss-term bug), are described in more detail under [Results](#results) and in the code comments where the fixes were made.
 
@@ -58,8 +56,7 @@ ik_simulator/        Interactive 3D application (PyVista + PySide6)
 pinn_app.py          CLI: train / evaluate / solve / viz
 run_simulator.py     Launcher for the interactive simulator
 tests/               Correctness tests (FK vs. autograd, FK vs. MuJoCo, simulator behavior)
-runs/                Training run checkpoints, logs, and plots
-slides/              Project review slide deck
+runs/                final_model.pt - the trained checkpoint the app and CLI use by default
 ```
 
 ## Setup
@@ -78,8 +75,8 @@ This installs PyTorch, NumPy, SciPy, MuJoCo, PyVista, PyVistaQt, and PySide6.
 
 ```bash
 python -m ik_simulator
-# or, to use a specific checkpoint:
-python -m ik_simulator --checkpoint runs/expE_h512_l40_mine.pt
+# or, to use a checkpoint you trained yourself:
+python -m ik_simulator --checkpoint runs/mine.pt
 ```
 
 **Command-line tools** (`pinn_app.py`):
@@ -103,15 +100,15 @@ python -m ik_simulator --selftest some_folder   # scripted end-to-end GUI run, s
 
 ## Results
 
-Full experiment history — including three real bugs found during development and how they were diagnosed and fixed — is in the code comments (`pinn_ik/train.py`, `pinn_ik/model.py`) and `runs/*.csv`. Summary:
+Three real bugs were found and fixed during development (a Jacobian indexing bug, an unreachable-training-target bug, an inert-loss-term bug) — the diagnosis and fix for each is documented in the code comments in `pinn_ik/train.py` and `pinn_ik/model.py`. Headline numbers, measured on tasks drawn from the training distribution and on 60 near-singular start poses:
 
 | Model | Mean position error | 95th percentile | Near-singularity manipulability |
 |---|---|---|---|
-| `final_model.pt` (default) | ~4.1 mm | ~13.2 mm | 0.0052 (less safe than DLS) |
-| `expE_h512_l40_mine.pt` | ~6.6 mm | ~16.2 mm | **0.0217** (~2.3x DLS) |
+| `final_model.pt` (shipped checkpoint) | ~4.1 mm | ~13.2 mm | 0.0052 (less safe than DLS) |
+| Same architecture, heavier singularity penalty | ~6.6 mm | ~16.2 mm | **0.0217** (~2.3x DLS) |
 | Classical DLS (reference) | ~0.1–0.5 mm | — | 0.0096 |
 
-Loss curves and training-progress plots for each run are in `runs/*.png`.
+Run `python pinn_app.py evaluate --checkpoint runs/final_model.pt` to reproduce the first row yourself.
 
 **Known limitations:**
 - The DH parameters are the commonly published values for the Panda, verified for internal self-consistency (PyTorch FK ≡ autograd ≡ MuJoCo ≡ MATLAB Robotics System Toolbox, to ~1e-9 m) but not independently checked against Franka Emika's official spec.
