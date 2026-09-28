@@ -1,0 +1,11 @@
+torch>=2.0
+numpy
+scipy
+matplotlib
+pytest
+pillow
+mujoco
+pyvista
+pyvistaqt
+PySide6
+qtpy

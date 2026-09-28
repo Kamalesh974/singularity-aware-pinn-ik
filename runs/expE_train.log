@@ -1,0 +1,27 @@
+step      1/12000 |    1.5s | lr 1.00e-03 | loss 0.24088 | pos_err  250.85 mm | pos 0.22976 | lim 0.00011 | sing 0.00028 | mean_w 0.0583
+step    500/12000 |  261.8s | lr 9.96e-04 | loss 0.05404 | pos_err   37.82 mm | pos 0.04158 | lim 0.00009 | sing 0.00031 | mean_w 0.0536
+step   1000/12000 |  502.4s | lr 9.83e-04 | loss 0.04132 | pos_err   24.08 mm | pos 0.02826 | lim 0.00006 | sing 0.00032 | mean_w 0.0551
+step   1500/12000 |  742.4s | lr 9.62e-04 | loss 0.03822 | pos_err   21.46 mm | pos 0.02530 | lim 0.00011 | sing 0.00032 | mean_w 0.0533
+step   2000/12000 |  985.1s | lr 9.34e-04 | loss 0.03192 | pos_err   15.50 mm | pos 0.01955 | lim 0.00007 | sing 0.00031 | mean_w 0.0560
+step   2500/12000 | 1261.5s | lr 8.98e-04 | loss 0.03060 | pos_err   14.31 mm | pos 0.01813 | lim 0.00007 | sing 0.00031 | mean_w 0.0551
+step   3000/12000 | 1535.2s | lr 8.55e-04 | loss 0.03070 | pos_err   15.24 mm | pos 0.01845 | lim 0.00005 | sing 0.00031 | mean_w 0.0527
+step   3500/12000 | 1722.5s | lr 8.06e-04 | loss 0.02793 | pos_err   12.59 mm | pos 0.01598 | lim 0.00006 | sing 0.00030 | mean_w 0.0545
+step   4000/12000 | 1842.3s | lr 7.52e-04 | loss 0.02616 | pos_err   11.78 mm | pos 0.01504 | lim 0.00007 | sing 0.00028 | mean_w 0.0555
+step   4500/12000 | 1963.3s | lr 6.94e-04 | loss 0.02779 | pos_err   12.31 mm | pos 0.01548 | lim 0.00007 | sing 0.00031 | mean_w 0.0542
+step   5000/12000 | 2079.4s | lr 6.33e-04 | loss 0.02740 | pos_err   12.06 mm | pos 0.01499 | lim 0.00008 | sing 0.00031 | mean_w 0.0529
+step   5500/12000 | 2199.4s | lr 5.70e-04 | loss 0.02566 | pos_err   11.12 mm | pos 0.01407 | lim 0.00010 | sing 0.00029 | mean_w 0.0557
+step   6000/12000 | 2315.1s | lr 5.05e-04 | loss 0.02466 | pos_err   10.29 mm | pos 0.01318 | lim 0.00012 | sing 0.00028 | mean_w 0.0535
+step   6500/12000 | 2436.7s | lr 4.40e-04 | loss 0.02404 | pos_err   11.03 mm | pos 0.01348 | lim 0.00006 | sing 0.00026 | mean_w 0.0532
+step   7000/12000 | 2549.3s | lr 3.77e-04 | loss 0.02343 | pos_err   10.44 mm | pos 0.01291 | lim 0.00011 | sing 0.00026 | mean_w 0.0546
+step   7500/12000 | 2673.2s | lr 3.16e-04 | loss 0.02356 | pos_err    9.83 mm | pos 0.01243 | lim 0.00009 | sing 0.00028 | mean_w 0.0537
+step   8000/12000 | 2785.3s | lr 2.57e-04 | loss 0.02187 | pos_err    9.76 mm | pos 0.01226 | lim 0.00007 | sing 0.00024 | mean_w 0.0558
+step   8500/12000 | 2910.5s | lr 2.04e-04 | loss 0.02167 | pos_err    9.50 mm | pos 0.01189 | lim 0.00009 | sing 0.00024 | mean_w 0.0546
+step   9000/12000 | 3024.5s | lr 1.55e-04 | loss 0.02321 | pos_err    9.37 mm | pos 0.01193 | lim 0.00010 | sing 0.00028 | mean_w 0.0534
+step   9500/12000 | 3149.8s | lr 1.12e-04 | loss 0.02126 | pos_err    9.05 mm | pos 0.01139 | lim 0.00006 | sing 0.00025 | mean_w 0.0532
+step  10000/12000 | 3263.4s | lr 7.63e-05 | loss 0.02086 | pos_err    8.36 mm | pos 0.01088 | lim 0.00008 | sing 0.00025 | mean_w 0.0554
+step  10500/12000 | 3387.7s | lr 4.77e-05 | loss 0.02027 | pos_err    8.54 mm | pos 0.01094 | lim 0.00007 | sing 0.00023 | mean_w 0.0548
+step  11000/12000 | 3501.3s | lr 2.69e-05 | loss 0.02132 | pos_err    8.87 mm | pos 0.01114 | lim 0.00007 | sing 0.00025 | mean_w 0.0532
+step  11500/12000 | 3627.4s | lr 1.42e-05 | loss 0.02130 | pos_err    8.42 mm | pos 0.01079 | lim 0.00007 | sing 0.00026 | mean_w 0.0534
+step  12000/12000 | 3741.0s | lr 1.00e-05 | loss 0.02082 | pos_err    8.25 mm | pos 0.01047 | lim 0.00007 | sing 0.00026 | mean_w 0.0541
+wrote training history to runs/expE_h512_l40_mine.csv
+wrote checkpoint to runs/expE_h512_l40_mine.pt
